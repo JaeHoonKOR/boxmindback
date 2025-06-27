@@ -1,0 +1,12 @@
+{
+  "name": "boxmindback",
+  "version": "1.0.0",
+  "description": "boxmind backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "jest"
+  },
+  "type": "commonjs"
+}
