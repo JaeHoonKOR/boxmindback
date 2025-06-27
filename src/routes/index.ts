@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import registerRoute from './register';
-import boxRoute from './box';
-import itemRoute from './item';
-import insightRoute from './insight';
+import userRouter from './userRouter';
+import boxRouter from './boxRouter';
+import itemRouter from './itemRouter';
+import insightRouter from './insightRouter';
+import { ROUTES } from '../constants';
 
 const router = Router();
-router.use(registerRoute);
-router.use('/box', boxRoute);
-router.use('/item', itemRoute);
-router.use('/insights', insightRoute);
+router.use(ROUTES.USERS, userRouter);
+router.use(ROUTES.BOX, boxRouter);
+router.use(ROUTES.ITEM, itemRouter);
+router.use(ROUTES.INSIGHTS, insightRouter);
 
 export default router;
