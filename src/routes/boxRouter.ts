@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { createBox, getBoxes } from '../controllers/boxController';
+import { ROUTES } from '../constants';
 
 const router = Router();
 router.post('/', createBox);
-router.get('/:userId', getBoxes);
+router.get(ROUTES.USERS + '/:userId', getBoxes);
 export default router;
