@@ -1,0 +1,54 @@
+// Prisma schema for BoxMind
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  boxes     Box[]
+}
+
+model Box {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  items     Item[]
+}
+
+model Item {
+  id           String   @id @default(uuid())
+  boxId        String
+  name         String
+  category     String
+  imageUrl     String?
+  barcode      String?
+  purchaseDate DateTime?
+  expiryDate   DateTime?
+  lastUsedDate DateTime?
+  createdAt    DateTime @default(now())
+  box          Box      @relation(fields: [boxId], references: [id])
+  reminders    Reminder[]
+}
+
+model Reminder {
+  id         String   @id @default(uuid())
+  itemId     String
+  type       ReminderType
+  notifiedAt DateTime @default(now())
+  item       Item     @relation(fields: [itemId], references: [id])
+}
+
+enum ReminderType {
+  expiry
+  reorg
+}
